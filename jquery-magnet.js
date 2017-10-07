@@ -16,6 +16,8 @@
         var $elem = this;
         var oldCssPosition;
         var oldTop;
+        var fixedWidth;
+        var oldWidth;
 
         $(document).ready(function(){
             init();
@@ -34,6 +36,8 @@
             $anchor = $("<div class='jquery-magnet-anchor'></div>");
             $anchor.insertBefore($elem);
 
+            fixedWidth = $elem.outerWidth();
+
             if(settings.after !== null)
                 $after = $(settings.after);
         }
@@ -51,20 +55,23 @@
 
             if(distance <= 0)
             {
-                if(isInTop === false || force === true) {
+                if(isInTop === false || force === true) { // We should stick to top
                     isInTop = true;
+                    oldWidth = $elem.outerWidth();
                     $anchor.css({'height': $elem.outerHeight()});
                     oldCssPosition = $elem.css('position');
                     oldTop = $elem.css('top');
-                    $elem.css({'position': 'fixed', 'top': offset});
+                    oldWidth = $elem.css('width');
+                    fixedWidth = $elem.outerWidth();
+                    $elem.css({'position': 'fixed', 'top': offset, 'width': fixedWidth});
                 }
             }
             else
             {
-                if(isInTop === true || force === true) {
+                if(isInTop === true || force === true) { // We should restore back to normal
                     isInTop = false;
                     $anchor.css({'height': '0'});
-                    $elem.css({'position': oldCssPosition, 'top': oldTop});
+                    $elem.css({'position': oldCssPosition, 'top': oldTop, 'width': oldWidth});
                 }
             }
         }
