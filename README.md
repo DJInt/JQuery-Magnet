@@ -1,5 +1,5 @@
 # JQuery-Magnet
-Keep an element on top of the screen after scrolling pass it
+Keep an element on top of the screen or after a specified element after scrolling pass it
 
 ## Installation
 Just include the script file wihtin your HTML page after including JQuery
