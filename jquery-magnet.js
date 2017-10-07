@@ -1,7 +1,7 @@
 /**
  * Developed By Jerry Tannous
  * jerry.tannous@gmail.com
- * Version 1.0
+ * Version 1.0.1
  */
 (function ( $ ) {
     $.fn.magnet = function( options ) {
