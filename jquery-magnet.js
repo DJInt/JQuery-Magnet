@@ -14,6 +14,8 @@
         var $after = null;
         var isInTop = false;
         var $elem = this;
+        var oldCssPosition;
+        var oldTop;
 
         $(document).ready(function(){
             init();
@@ -40,9 +42,7 @@
         {
             var offset = 0;
             if($after !== null && $after !== 'undefined')
-            {
                 offset = $after.outerHeight();
-            }
 
             var scrollTop     = $(window).scrollTop(),
                 elementOffset = $anchor.offset().top,
@@ -54,6 +54,8 @@
                 if(isInTop === false || force === true) {
                     isInTop = true;
                     $anchor.css({'height': $elem.outerHeight()});
+                    oldCssPosition = $elem.css('position');
+                    oldTop = $elem.css('top');
                     $elem.css({'position': 'fixed', 'top': offset});
                 }
             }
@@ -62,7 +64,7 @@
                 if(isInTop === true || force === true) {
                     isInTop = false;
                     $anchor.css({'height': '0'});
-                    $elem.css({'position': 'static', 'top': 'auto'});
+                    $elem.css({'position': oldCssPosition, 'top': oldTop});
                 }
             }
         }
